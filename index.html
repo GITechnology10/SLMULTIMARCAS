@@ -23,10 +23,6 @@ padding:20px;
 text-align:center;
 }
 
-header h1{
-margin:0;
-}
-
 .hero{
 background:#222;
 color:white;
@@ -34,18 +30,18 @@ padding:60px 20px;
 text-align:center;
 }
 
-.hero h2{
-font-size:32px;
-}
-
 .btn{
 background:#28a745;
-padding:12px 25px;
+padding:10px 20px;
 color:white;
 text-decoration:none;
 border-radius:6px;
 display:inline-block;
-margin-top:20px;
+margin-top:10px;
+}
+
+.btn-web{
+background:#007bff;
 }
 
 .container{
@@ -55,53 +51,60 @@ padding:20px;
 }
 
 .grid{
-
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
-
 }
 
 .card{
-
 background:white;
 border-radius:10px;
 overflow:hidden;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
+transition:transform .2s, box-shadow .2s;
+}
 
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 .card img{
-
 width:100%;
 height:180px;
 object-fit:cover;
-
 }
 
 .card h3{
-
 padding:10px;
 margin:0;
-
 }
 
 .card p{
-
 padding:0 10px;
-
 }
 
 .preco{
-
 font-size:22px;
 color:green;
 font-weight:bold;
+padding-bottom:10px;
+}
 
+.filtros{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+input, select{
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
 }
 
 .whatsapp{
-
 position:fixed;
 bottom:20px;
 right:20px;
@@ -111,17 +114,14 @@ padding:15px 20px;
 border-radius:50px;
 text-decoration:none;
 font-weight:bold;
-
 }
 
 footer{
-
 background:#111;
 color:white;
 text-align:center;
 padding:20px;
 margin-top:40px;
-
 }
 
 </style>
@@ -141,7 +141,7 @@ margin-top:40px;
 
 <h2>Encontre seu próximo carro</h2>
 
-<p>Confira nosso estoque atualizado automaticamente</p>
+<p>Confira nosso estoque atualizado</p>
 
 <a href="#estoque" class="btn">Ver veículos</a>
 
@@ -150,6 +150,21 @@ margin-top:40px;
 <section class="container" id="estoque">
 
 <h2>Estoque de veículos</h2>
+
+<div class="filtros">
+
+<input type="text" id="busca" placeholder="Buscar veículo...">
+
+<select id="filtroMarca">
+
+<option value="">Todas as marcas</option>
+<option value="Toyota">Toyota</option>
+<option value="Honda">Honda</option>
+<option value="Jeep">Jeep</option>
+
+</select>
+
+</div>
 
 <div class="grid" id="lista-carros"></div>
 
@@ -167,22 +182,6 @@ WhatsApp
 
 <script>
 
-async function carregarEstoque(){
-
-/*
-AQUI entra o integrador
-
-troque depois por exemplo:
-
-https://api.integrador.com/estoque
-*/
-
-const resposta = await fetch("https://raw.githubusercontent.com/json-iterator/test-data/master/large-file.json")
-
-const container = document.getElementById("lista-carros")
-
-/* SIMULAÇÃO DE ESTOQUE */
-
 const carros = [
 
 {
@@ -190,7 +189,8 @@ marca:"Toyota",
 modelo:"Corolla",
 ano:2022,
 preco:115000,
-img:"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022.jpg"
+img:"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022.jpg",
+webmotors:"https://www.webmotors.com.br/"
 },
 
 {
@@ -198,7 +198,8 @@ marca:"Honda",
 modelo:"Civic",
 ano:2021,
 preco:109000,
-img:"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021.jpg"
+img:"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021.jpg",
+webmotors:"https://www.webmotors.com.br/"
 },
 
 {
@@ -206,18 +207,25 @@ marca:"Jeep",
 modelo:"Compass",
 ano:2023,
 preco:145000,
-img:"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022.jpg"
+img:"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022.jpg",
+webmotors:"https://www.webmotors.com.br/"
 }
 
 ]
 
-carros.forEach(carro=>{
+function mostrarCarros(lista){
+
+const container = document.getElementById("lista-carros")
+
+container.innerHTML=""
+
+lista.forEach(carro=>{
 
 const card = document.createElement("div")
 
 card.classList.add("card")
 
-card.innerHTML = `
+card.innerHTML=`
 
 <img src="${carro.img}">
 
@@ -231,6 +239,10 @@ card.innerHTML = `
 Tenho interesse
 </a>
 
+<a class="btn btn-web" href="${carro.webmotors}" target="_blank">
+Ver no Webmotors
+</a>
+
 `
 
 container.appendChild(card)
@@ -239,7 +251,33 @@ container.appendChild(card)
 
 }
 
-carregarEstoque()
+function filtrar(){
+
+const busca = document.getElementById("busca").value.toLowerCase()
+
+const marca = document.getElementById("filtroMarca").value
+
+const filtrados = carros.filter(carro=>{
+
+const nome = (carro.marca + " " + carro.modelo).toLowerCase()
+
+const buscaOk = nome.includes(busca)
+
+const marcaOk = marca==="" || carro.marca===marca
+
+return buscaOk && marcaOk
+
+})
+
+mostrarCarros(filtrados)
+
+}
+
+document.getElementById("busca").addEventListener("input",filtrar)
+
+document.getElementById("filtroMarca").addEventListener("change",filtrar)
+
+mostrarCarros(carros)
 
 </script>
 
