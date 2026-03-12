@@ -422,3 +422,83 @@ mostrar(carros)
 
 </body>
 </html>
+  <!-- BOTÃO IA -->
+
+<div id="ai-button">🤖</div>
+
+<div id="ai-chat">
+<iframe 
+src="https://cdn.botpress.cloud/webchat/v3.6/shareable.html?configUrl=https://files.bpcontent.cloud/2026/03/12/17/20260312172031-UL43DWMO.json">
+</iframe>
+</div>
+
+<style>
+
+#ai-button{
+position:fixed;
+bottom:100px;
+right:25px;
+width:60px;
+height:60px;
+background:#ff8c00;
+color:white;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+cursor:pointer;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+z-index:9999;
+}
+
+#ai-chat{
+position:fixed;
+bottom:170px;
+right:25px;
+width:380px;
+height:600px;
+display:none;
+z-index:9999;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+#ai-chat iframe{
+width:100%;
+height:100%;
+border:none;
+border-radius:10px;
+}
+
+/* AJUSTE PARA CELULAR */
+
+@media (max-width:600px){
+
+#ai-chat{
+right:10px;
+left:10px;
+width:auto;
+height:70vh;
+bottom:120px;
+}
+
+}
+
+</style>
+
+<script>
+
+const aiButton = document.getElementById("ai-button");
+const aiChat = document.getElementById("ai-chat");
+
+aiButton.onclick = () => {
+
+if(aiChat.style.display === "block"){
+aiChat.style.display = "none";
+}else{
+aiChat.style.display = "block";
+}
+
+}
+
+</script>
