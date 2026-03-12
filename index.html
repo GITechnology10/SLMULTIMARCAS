@@ -41,7 +41,7 @@ text-decoration:none;
 font-weight:bold;
 }
 
-/* HERO COM IMAGEM */
+/* HERO */
 
 .hero{
 
@@ -144,6 +144,28 @@ border-radius:10px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* GALERIA */
+
+.galeria{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.galeria img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+transition:.3s;
+}
+
+.galeria img:hover{
+transform:scale(1.05);
+}
+
 /* BOTÃO WHATSAPP */
 
 .whatsapp{
@@ -190,8 +212,9 @@ margin-top:40px;
 
 <nav>
 
-<a href="#estoque">Estoque</a>
 <a href="#sobre">Sobre</a>
+<a href="#estoque">Estoque</a>
+<a href="#clientes">Clientes</a>
 <a href="#contato">Contato</a>
 
 </nav>
@@ -204,14 +227,6 @@ margin-top:40px;
 <p>Confira nosso estoque de veículos</p>
 
 <a href="#estoque" class="btn">Ver veículos</a>
-
-</section>
-
-<section class="container" id="estoque">
-
-<h2>Estoque de veículos</h2>
-
-<div class="grid" id="lista"></div>
 
 </section>
 
@@ -236,6 +251,29 @@ Trabalhamos com veículos selecionados para garantir confiança e qualidade em c
 
 </section>
 
+<section class="container" id="estoque">
+
+<h2>Estoque de veículos</h2>
+
+<div class="grid" id="lista"></div>
+
+</section>
+
+<section class="container" id="clientes">
+
+<h2>Clientes satisfeitos</h2>
+
+<div class="galeria">
+
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+<img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e">
+<img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1">
+<img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d">
+
+</div>
+
+</section>
+
 <section class="container" id="contato">
 
 <div class="contato">
@@ -247,8 +285,12 @@ Av. das Indústrias, 1153<br>
 Cidade Industrial
 </p>
 
-<p><b>WhatsApp:</b><br>
-(41) 99929-1224 – Saimon
+<p><b>Telefone:</b><br>
+(41) 98798-9671
+</p>
+
+<p><b>Email:</b><br>
+saraisabelle43@gmail.com
 </p>
 
 <p><b>Instagram:</b><br>
@@ -271,7 +313,7 @@ src="https://maps.google.com/maps?q=Av.%20das%20Industrias%201153&t=&z=13&ie=UTF
 </section>
 
 <a class="whatsapp"
-href="https://wa.me/5541999291224?text=Olá%20tenho%20interesse%20em%20um%20carro"
+href="https://wa.me/5541987989671?text=Olá%20tenho%20interesse%20em%20um%20carro"
 target="_blank">
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
@@ -284,7 +326,8 @@ WhatsApp
 
 <p>© SL Multimarcas</p>
 <p>Av. das Indústrias, 1153 – Cidade Industrial</p>
-<p>WhatsApp: (41) 99929-1224</p>
+<p>Telefone: (41) 98798-9671</p>
+<p>Email: saraisabelle43@gmail.com</p>
 <p>Instagram oficial: @sl.multimarcas959</p>
 
 </footer>
@@ -337,7 +380,7 @@ div.innerHTML=`
 
 <p class="preco">R$ ${c.preco.toLocaleString()}</p>
 
-<a class="btn" href="https://wa.me/5541999291224?text=Olá tenho interesse no ${c.marca} ${c.modelo}">
+<a class="btn" href="https://wa.me/5541987989671?text=Olá tenho interesse no ${c.marca} ${c.modelo}">
 Tenho interesse
 </a>
 
