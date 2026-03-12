@@ -23,6 +23,13 @@ padding:20px;
 text-align:center;
 }
 
+nav a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+font-weight:bold;
+}
+
 .hero{
 background:#222;
 color:white;
@@ -40,14 +47,10 @@ display:inline-block;
 margin-top:10px;
 }
 
-.btn-web{
-background:#007bff;
-}
-
 .container{
 max-width:1200px;
 margin:auto;
-padding:20px;
+padding:40px 20px;
 }
 
 .grid{
@@ -61,12 +64,11 @@ background:white;
 border-radius:10px;
 overflow:hidden;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
-transition:transform .2s, box-shadow .2s;
+transition:.2s;
 }
 
 .card:hover{
 transform:translateY(-5px);
-box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 .card img{
@@ -80,15 +82,11 @@ padding:10px;
 margin:0;
 }
 
-.card p{
-padding:0 10px;
-}
-
 .preco{
-font-size:22px;
 color:green;
 font-weight:bold;
-padding-bottom:10px;
+padding:10px;
+font-size:20px;
 }
 
 .filtros{
@@ -98,7 +96,7 @@ flex-wrap:wrap;
 margin-bottom:20px;
 }
 
-input, select{
+input,select{
 padding:10px;
 border-radius:6px;
 border:1px solid #ccc;
@@ -108,19 +106,57 @@ border:1px solid #ccc;
 position:fixed;
 bottom:20px;
 right:20px;
-background:#25d366;
+background:#25D366;
 color:white;
-padding:15px 20px;
+padding:14px 18px;
 border-radius:50px;
 text-decoration:none;
+display:flex;
+align-items:center;
+gap:8px;
 font-weight:bold;
+}
+
+.whatsapp img{
+width:22px;
+}
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+max-width:600px;
+}
+
+.modal img{
+width:100%;
+border-radius:6px;
+}
+
+.sobre, .contato{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 footer{
 background:#111;
 color:white;
 text-align:center;
-padding:20px;
+padding:30px;
 margin-top:40px;
 }
 
@@ -135,13 +171,18 @@ margin-top:40px;
 <h1>SL Multimarcas</h1>
 <p>Veículos com procedência e qualidade</p>
 
+<nav>
+<a href="#estoque">Estoque</a>
+<a href="#sobre">Sobre</a>
+<a href="#contato">Contato</a>
+</nav>
+
 </header>
 
 <section class="hero">
 
 <h2>Encontre seu próximo carro</h2>
-
-<p>Confira nosso estoque atualizado</p>
+<p>Confira nosso estoque de veículos</p>
 
 <a href="#estoque" class="btn">Ver veículos</a>
 
@@ -153,44 +194,126 @@ margin-top:40px;
 
 <div class="filtros">
 
-<input type="text" id="busca" placeholder="Buscar veículo...">
+<input type="text" id="busca" placeholder="Buscar veículo">
 
-<select id="filtroMarca">
-
-<option value="">Todas as marcas</option>
-<option value="Toyota">Toyota</option>
-<option value="Honda">Honda</option>
-<option value="Jeep">Jeep</option>
-
+<select id="marca">
+<option value="">Marca</option>
+<option>Toyota</option>
+<option>Honda</option>
+<option>Jeep</option>
 </select>
+
+<input type="number" id="preco" placeholder="Preço máximo">
+
+<input type="number" id="ano" placeholder="Ano mínimo">
 
 </div>
 
-<div class="grid" id="lista-carros"></div>
+<div class="grid" id="lista"></div>
 
 </section>
 
-<a class="whatsapp" href="https://wa.me/5511999999999">
+<section class="container" id="sobre">
+
+<div class="sobre">
+
+<h2>Sobre a SL Multimarcas</h2>
+
+<p>
+A SL Multimarcas é especializada na venda de veículos com procedência e qualidade.
+Nosso objetivo é oferecer segurança e transparência para nossos clientes na compra
+do seu próximo carro.
+</p>
+
+<p>
+Estamos localizados na Av. das Indústrias, 1153 – Cidade Industrial.
+Trabalhamos com veículos selecionados para garantir confiança e qualidade em cada negociação.
+</p>
+
+</div>
+
+</section>
+
+<section class="container" id="contato">
+
+<div class="contato">
+
+<h2>Contato</h2>
+
+<p><b>Endereço:</b><br>
+Av. das Indústrias, 1153<br>
+Cidade Industrial</p>
+
+<p><b>WhatsApp:</b><br>
+(41) 99929-1224 – Saimon</p>
+
+<p><b>Instagram:</b><br>
+@sl.multimarcas959</p>
+
+<h3>Localização</h3>
+
+<iframe
+width="100%"
+height="300"
+style="border:0"
+loading="lazy"
+allowfullscreen
+src="https://maps.google.com/maps?q=Av.%20das%20Industrias%201153&t=&z=13&ie=UTF8&iwloc=&output=embed">
+</iframe>
+
+</div>
+
+</section>
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<img id="modalImg">
+
+<h3 id="modalTitulo"></h3>
+
+<p id="modalPreco"></p>
+
+<a id="modalWhatsapp" class="btn">Falar no WhatsApp</a>
+
+<br><br>
+
+<button onclick="fecharModal()">Fechar</button>
+
+</div>
+
+</div>
+
+<a class="whatsapp"
+href="https://wa.me/5541999291224?text=Olá%20tenho%20interesse%20em%20um%20carro"
+target="_blank">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+
 WhatsApp
+
 </a>
 
 <footer>
 
 <p>© SL Multimarcas</p>
+<p>Av. das Indústrias, 1153 – Cidade Industrial</p>
+<p>WhatsApp: (41) 99929-1224</p>
+<p>Instagram oficial: @sl.multimarcas959</p>
 
 </footer>
 
 <script>
 
-const carros = [
+const carros=[
 
 {
 marca:"Toyota",
 modelo:"Corolla",
 ano:2022,
 preco:115000,
-img:"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022.jpg",
-webmotors:"https://www.webmotors.com.br/"
+img:"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022.jpg"
 },
 
 {
@@ -198,8 +321,7 @@ marca:"Honda",
 modelo:"Civic",
 ano:2021,
 preco:109000,
-img:"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021.jpg",
-webmotors:"https://www.webmotors.com.br/"
+img:"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021.jpg"
 },
 
 {
@@ -207,80 +329,61 @@ marca:"Jeep",
 modelo:"Compass",
 ano:2023,
 preco:145000,
-img:"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022.jpg",
-webmotors:"https://www.webmotors.com.br/"
+img:"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022.jpg"
 }
 
 ]
 
-function mostrarCarros(lista){
+function mostrar(lista){
 
-const container = document.getElementById("lista-carros")
-
+const container=document.getElementById("lista")
 container.innerHTML=""
 
-lista.forEach(carro=>{
+lista.forEach(c=>{
 
-const card = document.createElement("div")
+const div=document.createElement("div")
+div.className="card"
 
-card.classList.add("card")
+div.innerHTML=`
 
-card.innerHTML=`
+<img src="${c.img}">
 
-<img src="${carro.img}">
+<h3>${c.marca} ${c.modelo}</h3>
 
-<h3>${carro.marca} ${carro.modelo}</h3>
+<p class="preco">R$ ${c.preco.toLocaleString()}</p>
 
-<p>Ano: ${carro.ano}</p>
-
-<p class="preco">R$ ${carro.preco.toLocaleString()}</p>
-
-<a class="btn" href="https://wa.me/5511999999999">
-Tenho interesse
-</a>
-
-<a class="btn btn-web" href="${carro.webmotors}" target="_blank">
-Ver no Webmotors
-</a>
+<a class="btn" onclick='abrirModal(${JSON.stringify(c)})'>Ver detalhes</a>
 
 `
 
-container.appendChild(card)
+container.appendChild(div)
 
 })
 
 }
 
-function filtrar(){
+function abrirModal(c){
 
-const busca = document.getElementById("busca").value.toLowerCase()
+document.getElementById("modal").style.display="flex"
 
-const marca = document.getElementById("filtroMarca").value
+document.getElementById("modalImg").src=c.img
+document.getElementById("modalTitulo").innerText=c.marca+" "+c.modelo+" "+c.ano
+document.getElementById("modalPreco").innerText="R$ "+c.preco.toLocaleString()
 
-const filtrados = carros.filter(carro=>{
-
-const nome = (carro.marca + " " + carro.modelo).toLowerCase()
-
-const buscaOk = nome.includes(busca)
-
-const marcaOk = marca==="" || carro.marca===marca
-
-return buscaOk && marcaOk
-
-})
-
-mostrarCarros(filtrados)
+document.getElementById("modalWhatsapp").href=
+`https://wa.me/5541999291224?text=Olá tenho interesse no ${c.marca} ${c.modelo}`
 
 }
 
-document.getElementById("busca").addEventListener("input",filtrar)
+function fecharModal(){
 
-document.getElementById("filtroMarca").addEventListener("change",filtrar)
+document.getElementById("modal").style.display="none"
 
-mostrarCarros(carros)
+}
+
+mostrar(carros)
 
 </script>
 
 </body>
-
 </html>
