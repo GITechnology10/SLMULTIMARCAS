@@ -355,33 +355,54 @@ target="_blank">
 
 </footer>
 
-
 <script>
 
 const carros=[
+
+{
+marca:"Renault",
+modelo:"Kwid Zen 1.0",
+ano:2019,
+preco:39900,
+
+imgs:[
+"https://via.placeholder.com/400x300",
+"https://via.placeholder.com/400x300",
+"https://via.placeholder.com/400x300"
+],
+
+desc:[
+"Ano 2019",
+"Direção hidráulica",
+"Ar condicionado",
+"Vidros elétricos",
+"Ar quente / frio",
+"Desembaçador",
+"Revisado",
+"Financia para autônomo"
+]
+
+},
 
 {
 marca:"Toyota",
 modelo:"Corolla",
 ano:2022,
 preco:115000,
-img:"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022.jpg"
-},
 
-{
-marca:"Honda",
-modelo:"Civic",
-ano:2021,
-preco:109000,
-img:"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021.jpg"
-},
+imgs:[
+"https://via.placeholder.com/400x300",
+"https://via.placeholder.com/400x300"
+],
 
-{
-marca:"Jeep",
-modelo:"Compass",
-ano:2023,
-preco:145000,
-img:"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022.jpg"
+desc:[
+"Ano 2022",
+"Automático",
+"Central multimídia",
+"Banco em couro",
+"Revisado"
+]
+
 }
 
 ]
@@ -398,13 +419,35 @@ div.className="card"
 
 div.innerHTML=`
 
-<img src="${c.img}">
+<div style="position:relative">
+
+<img src="${c.imgs[0]}">
+
+<div style="
+position:absolute;
+bottom:10px;
+right:10px;
+background:rgba(0,0,0,0.7);
+color:white;
+padding:5px 10px;
+border-radius:20px;
+font-size:12px;
+">
++${c.imgs.length}
+</div>
+
+</div>
 
 <h3>${c.marca} ${c.modelo}</h3>
 
 <p class="preco">R$ ${c.preco.toLocaleString()}</p>
 
-<a class="btn" href="https://wa.me/5541987989671?text=Olá tenho interesse no ${c.marca} ${c.modelo}">
+<ul style="padding:10px; font-size:14px;">
+${c.desc.map(d=>`<li>✔ ${d}</li>`).join("")}
+</ul>
+
+<a class="btn" target="_blank"
+href="https://wa.me/5541987989671?text=Olá, tenho interesse no ${c.marca} ${c.modelo} ${c.ano}">
 Tenho interesse
 </a>
 
