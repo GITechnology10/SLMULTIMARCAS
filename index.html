@@ -355,197 +355,71 @@ target="_blank">
 
 </footer>
 
-<script>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-
-body{
-  font-family: Arial;
-  background:#f5f5f5;
-}
-
-.card{
-  background:white;
-  border-radius:10px;
-  margin:20px;
-  padding:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-.card img{
-  width:100%;
-  border-radius:10px;
-}
-
-.preco{
-  color:green;
-  font-weight:bold;
-  font-size:20px;
-}
-
-.btn{
-  display:block;
-  text-align:center;
-  background:green;
-  color:white;
-  padding:10px;
-  border-radius:5px;
-  text-decoration:none;
-  margin:10px;
-}
-
-/* 🔥 GALERIA */
-.miniaturas{
-  display:flex;
-  gap:6px;
-  margin-top:8px;
-  overflow-x:auto;
-}
-
-.miniaturas img{
-  width:70px;
-  cursor:pointer;
-  border-radius:6px;
-  opacity:0.7;
-  transition:0.3s;
-}
-
-.miniaturas img:hover{
-  opacity:1;
-  transform:scale(1.05);
-}
-
-</style>
-</head>
-
-<body>
-
-<div id="lista"></div>
 
 <script>
 
 const carros=[
 
 {
-marca:"Volkswagen",
-modelo:"FOX CITY 1.0 MI 8V",
-ano:2009,
-preco:24900,
-
-imgs: [
-"https://i.postimg.cc/1zCTLnrb/d50ab984-b337-496e-b5e6-f9295c718e1b.jpg",
-"https://i.postimg.cc/wBXM2z5y/2ff65da2-2329-4033-a7ef-ae7590da3526.jpg",
-"https://i.postimg.cc/wBpT7PK5/cebd5b54-4f1f-4956-a3f3-69b46cf0be7a.jpg",
-"https://i.postimg.cc/t409Mf4w/0d6e5355-cf73-4b29-bcc5-9e82072e3082.jpg",
-"https://i.postimg.cc/YSrBcwKQ/5d59c402-a7e1-4c8e-a2cd-07bcc9d67033.jpg",
-"https://i.postimg.cc/sgcDGm36/1256f1df-a85e-4a28-ab13-498d5f4803fe.jpg",
-"https://i.postimg.cc/KYjFkyqG/aab09151-39c7-490f-a57f-b713de1d84d1.jpg",
-"https://i.postimg.cc/wxLzs2VX/3351fad8-f88f-46c5-a9b2-cf06110b0714.jpg",
-"https://i.postimg.cc/8zKgV0pF/2adc4fd5-f074-428b-b850-28e2c315c304.jpg",
-"https://i.postimg.cc/SQ60KsSP/5dbdbbcb-225f-4e57-88f1-66ea5729be11.jpg",
-"https://i.postimg.cc/BQmV8Pd2/3ff6f171-9528-4307-a6cf-37c72f3c2af8.jpg",
-"https://i.postimg.cc/YSYRxvyf/08314dbf-559c-4ab0-b661-c4d9d0235a52.jpg",
-"https://i.postimg.cc/8CRd6q75/76f42050-c025-4b16-8cf8-1e0be92a07e7.jpg",
-"https://i.postimg.cc/JngNXJNR/4e2a947c-e3bb-483e-9f74-5be5517199e7.jpg",
-],
-
-desc:[
-"Ano 2009",
-"Direção hidráulica",
-"Ar condicionado",
-"Vidros elétricos",
-"Ar quente / frio",
-"Desembaçador",
-"Revisado",
-"Financia para autônomo"
-]
-
-},
-
-{
 marca:"Toyota",
 modelo:"Corolla",
 ano:2022,
 preco:115000,
-
 imgs:[
-"https://via.placeholder.com/400x300",
-"https://via.placeholder.com/400x300"
-],
-
-desc:[
-"Ano 2022",
-"Automático",
-"Central multimídia",
-"Banco em couro",
-"Revisado"
+"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022.jpg",
+"https://cdn.motor1.com/images/mgl/BEooZ/s1/toyota-corolla-2022-2.jpg"
 ]
+},
 
+{
+marca:"Honda",
+modelo:"Civic",
+ano:2021,
+preco:109000,
+imgs:[
+"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021.jpg",
+"https://cdn.motor1.com/images/mgl/0AN2E/s1/honda-civic-2021-2.jpg"
+]
+},
+
+{
+marca:"Jeep",
+modelo:"Compass",
+ano:2023,
+preco:145000,
+imgs:[
+"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022.jpg",
+"https://cdn.motor1.com/images/mgl/QE0zX/s1/jeep-compass-2022-2.jpg"
+]
 }
 
 ]
 
-// 🔥 TROCAR IMAGEM
-function trocarImagem(id, img){
-  document.getElementById(id).src = img
-}
-
-// 🔥 MOSTRAR CARROS
 function mostrar(lista){
 
 const container=document.getElementById("lista")
 container.innerHTML=""
 
-lista.forEach((c, index)=>{
+lista.forEach((c,i)=>{
 
-const imgsValidas = c.imgs.filter(img => img !== "")
+c.index = 0
 
 const div=document.createElement("div")
 div.className="card"
 
 div.innerHTML=`
 
-<div style="position:relative">
-
-<img id="img-${index}" src="${imgsValidas[0]}">
-
-<div style="
-position:absolute;
-bottom:10px;
-right:10px;
-background:rgba(0,0,0,0.7);
-color:white;
-padding:5px 10px;
-border-radius:20px;
-font-size:12px;
-">
-+${imgsValidas.length}
-</div>
-
-</div>
-
-<div class="miniaturas">
-${imgsValidas.map(img => `
-<img src="${img}" onclick="trocarImagem('img-${index}','${img}')">
-`).join("")}
+<div class="carousel">
+  <img src="${c.imgs[0]}" id="img-${i}">
+  <button onclick="trocar(${i}, -1)">‹</button>
+  <button onclick="trocar(${i}, 1)">›</button>
 </div>
 
 <h3>${c.marca} ${c.modelo}</h3>
 
 <p class="preco">R$ ${c.preco.toLocaleString()}</p>
 
-<ul style="padding:10px; font-size:14px;">
-${c.desc.map(d=>`<li>✔ ${d}</li>`).join("")}
-</ul>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5541987989671?text=Olá, tenho interesse no ${c.marca} ${c.modelo} ${c.ano}">
+<a class="btn" href="https://wa.me/5541987989671?text=Olá tenho interesse no ${c.marca} ${c.modelo}">
 Tenho interesse
 </a>
 
@@ -557,10 +431,22 @@ container.appendChild(div)
 
 }
 
+function trocar(i, direcao){
+
+const carro = carros[i]
+
+carro.index += direcao
+
+if(carro.index < 0) carro.index = carro.imgs.length - 1
+if(carro.index >= carro.imgs.length) carro.index = 0
+
+document.getElementById(`img-${i}`).src = carro.imgs[carro.index]
+
+}
+
 mostrar(carros)
 
 </script>
-
 </body>
 </html>
   <!-- BOTÃO IA -->
